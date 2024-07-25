@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 export default function App() {
   const [comments, setComments] = useState([]);
   const [replies, setReplies] = useState([]);
+  const [inpValue, setInpValue] = useState('')
 
   useEffect(function () {
     async function getComments() {
@@ -26,22 +27,37 @@ export default function App() {
           <UserComment comment={comment} key={comment.id} />
         ))}
 
-        <div className="border-l border-greyish-blue pl-8 ml-7">
+        <div className="border-l border-greyish-blue-opaque pl-8 ml-7">
           {replies.map((reply) => (
             <UserComment comment={reply} key={reply.id} />
           ))}
         </div>
+
+        <InputFromUser inpValue={inpValue} onSetValue={setInpValue}/>
       </main>
     </div>
   );
 }
 
 function UserComment({ comment }) {
+  const [voteCount, setVoteCount] = useState(comment.score);
+
+  function handleVoteCount(e) {
+    if (e.target.textContent === '+') {
+      setVoteCount(prev => prev + 1);
+    }
+    if (e.target.textContent === '-') {
+      setVoteCount(prev => prev - 1);
+    }
+  }
+
+
+
   return (
     <div className="bg-white p-5 flex gap-5 rounded-lg mb-5">
-      <section className="bg-light-grey basis-[6.5%] py-1 flex flex-col gap-1 items-center rounded-lg h-[5.4rem]">
+      <section onClick={handleVoteCount} className="bg-light-grey basis-[6.5%] py-1 flex flex-col gap-1 items-center rounded-lg h-[5.4rem]">
         <div className="text-greyish-blue font-semibold cursor-pointer">+</div>
-        <h2 className="text-moderate-blue font-bold">{comment.score}</h2>
+        <h2 className="text-moderate-blue font-bold">{voteCount}</h2>
         <div className="text-greyish-blue font-semibold cursor-pointer">-</div>
       </section>
       <section className="basis-[92%]  border-soft-red">
@@ -81,7 +97,15 @@ function UserComment({ comment }) {
   );
 }
 
-function InputFromUser() {}
+function InputFromUser({inpValue, onSetValue}) {
+  return (
+    <div className="flex border justify-between bg-white p-4 rounded-lg">
+      <img className="w-[5%] h-[5%]" src="./images/avatars/image-juliusomo.png" alt="current-user-icon"></img>
+      <form className="border border-greyish-blue-opaque w-[75%] rounded-md"><input value={inpValue} onChange={e => onSetValue(e)} type="textarea" className="p-3 placeholder:text-greyish-blue w-full border border-none outline-none rounded-md" placeholder="Add a comment..."></input></form>
+      <button className="bg-moderate-blue text-white font-bold rounded-lg px-5 py-3">Send</button>
+    </div>
+  )
+}
 
 // function UserComment({ comment, replies }) {
 //   // Function to render a single comment or reply
