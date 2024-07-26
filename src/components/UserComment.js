@@ -1,9 +1,9 @@
 import Message from "./Message";
 
-export default function UserComment({ comment }) {
+export default function UserComment({ comment, onToggleDeleteModal }) {
     return (
       <div className="border-soft-red">
-        <Message comment={comment} key={comment.id} />
+        <Message comment={comment} key={comment.id} onToggleDeleteModal={onToggleDeleteModal}/>
         <div className="border-l border-greyish-blue-opaque pl-8 ml-7">
           {comment.replies.length > 0 &&
             comment.replies.map((reply) => (

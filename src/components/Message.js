@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Message({ comment }) {
+export default function Message({ comment, onToggleDeleteModal }) {
   const [voteCount, setVoteCount] = useState(comment.score);
 
   function handleVoteCount(e) {
@@ -53,7 +53,7 @@ export default function Message({ comment }) {
           >
             <img src="./images/icon-reply.svg" alt="reply-icon"></img>
             <h4
-              onClick={() => console.log(comment)}
+              //   onClick={onToggleDeleteModal}
               className="text-moderate-blue font-bold"
             >
               Reply
@@ -65,18 +65,16 @@ export default function Message({ comment }) {
               comment.user.username === "juliusomo" ? "flex gap-4" : "hidden"
             }
           >
-            <div className="flex items-center gap-2 cursor-pointer">
+            <div
+              onClick={onToggleDeleteModal}
+              className="flex items-center gap-2 cursor-pointer"
+            >
               <img src="./images/icon-delete.svg" alt="delete-icon"></img>
               <p className="font-bold text-soft-red">Delete</p>
             </div>
             <div className="flex items-center gap-2 cursor-pointer">
               <img src="./images/icon-edit.svg" alt="edit-icon"></img>
-              <p
-                onClick={() => console.log(comment)}
-                className="font-bold text-moderate-blue"
-              >
-                Edit
-              </p>
+              <p className="font-bold text-moderate-blue">Edit</p>
             </div>
           </article>
         </article>
