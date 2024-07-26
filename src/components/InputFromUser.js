@@ -12,7 +12,7 @@ export default function InputFromUser({
         src={curUserImg}
         alt="current-user-icon"
       ></img>
-      <form className="border border-greyish-blue-opaque w-[75%] rounded-md">
+      <form onSubmit={onUserInput} className="border border-greyish-blue-opaque w-[75%] rounded-md">
         <input
           value={inpValue}
           onChange={(e) => onSetValue(e)}
