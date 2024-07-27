@@ -2,12 +2,17 @@ export default function InputFromUser({
   buttonType,
   inpValue,
   onSetValue,
-  curUser,
   curUserImg,
   onUserInput,
+  commentId
 }) {
+
+  function handleSubmit(e) {
+    onUserInput(e, commentId);
+  }
+
   return (
-    <div className="flex border justify-between bg-white p-4 rounded-lg">
+    <div className="flex  border-soft-red justify-between bg-white p-4 rounded-lg mb-2 mt-[-.5rem]">
       <img
         className="w-[5%] h-[5%]"
         src={curUserImg}
@@ -26,7 +31,7 @@ export default function InputFromUser({
       </form>
       <button
         className="bg-moderate-blue text-white font-bold rounded-lg px-5 py-3"
-        onClick={onUserInput}
+        onClick={e => handleSubmit(e)}
       >
         {buttonType}
       </button>
