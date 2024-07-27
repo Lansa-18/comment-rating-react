@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Message({ comment, onToggleDeleteModal }) {
+export default function Message({ comment, onToggleDeleteModal, onReplies }) {
   const [voteCount, setVoteCount] = useState(comment.score);
 
   function handleVoteCount(e) {
@@ -13,7 +13,7 @@ export default function Message({ comment, onToggleDeleteModal }) {
   }
 
   return (
-    <div className="bg-white p-6 flex gap-5 rounded-lg mb-5">
+    <div className="bg-white p-6 flex gap-5 rounded-lg mb-5 border border-soft-red">
       <section
         onClick={handleVoteCount}
         className="bg-light-grey basis-[6.5%] py-1 flex flex-col gap-1 items-center rounded-lg h-[5.4rem]"
@@ -45,6 +45,7 @@ export default function Message({ comment, onToggleDeleteModal }) {
           </div>
 
           <div
+            onClick={onReplies}
             className={
               comment.user.username !== "juliusomo"
                 ? "flex items-center gap-2 border-soft-red cursor-pointer"
@@ -52,12 +53,7 @@ export default function Message({ comment, onToggleDeleteModal }) {
             }
           >
             <img src="./images/icon-reply.svg" alt="reply-icon"></img>
-            <h4
-              //   onClick={onToggleDeleteModal}
-              className="text-moderate-blue font-bold"
-            >
-              Reply
-            </h4>
+            <h4 className="text-moderate-blue font-bold">Reply</h4>
           </div>
 
           <article
@@ -66,7 +62,7 @@ export default function Message({ comment, onToggleDeleteModal }) {
             }
           >
             <div
-              onClick={onToggleDeleteModal}
+              onClick={() => onToggleDeleteModal(comment.id)}
               className="flex items-center gap-2 cursor-pointer"
             >
               <img src="./images/icon-delete.svg" alt="delete-icon"></img>

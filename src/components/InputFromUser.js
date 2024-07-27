@@ -1,4 +1,5 @@
 export default function InputFromUser({
+  buttonType,
   inpValue,
   onSetValue,
   curUser,
@@ -12,7 +13,10 @@ export default function InputFromUser({
         src={curUserImg}
         alt="current-user-icon"
       ></img>
-      <form onSubmit={onUserInput} className="border border-greyish-blue-opaque w-[75%] rounded-md">
+      <form
+        onSubmit={onUserInput}
+        className="border border-greyish-blue-opaque w-[75%] rounded-md"
+      >
         <input
           value={inpValue}
           onChange={(e) => onSetValue(e)}
@@ -24,7 +28,7 @@ export default function InputFromUser({
         className="bg-moderate-blue text-white font-bold rounded-lg px-5 py-3"
         onClick={onUserInput}
       >
-        Send
+        {buttonType}
       </button>
     </div>
   );
