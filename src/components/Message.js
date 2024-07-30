@@ -136,13 +136,13 @@ export default function Message({
         <div className="hidden custom-680:flex border border-black justify-between items-center">
           <section
             onClick={handleVoteCount}
-            className="bg-light-grey py-1 hidden gap-1 rounded-lg custom-680:flex"
+            className="bg-light-grey w-[19%] justify-between items-center py-1 px-3 hidden gap-1 rounded-lg custom-680:flex phone:w-[25%]"
           >
-            <div className="text-greyish-blue font-semibold cursor-pointer hover:text-moderate-blue transition-all duration-100">
+            <div className="text-greyish-blue font-semibold cursor-pointer hover:text-moderate-blue transition-all duration-100 text-xl">
               +
             </div>
             <h2 className="text-moderate-blue font-bold">{voteCount}</h2>
-            <div className="text-greyish-blue font-semibold cursor-pointer hover:text-moderate-blue transition-all duration-100">
+            <div className="text-greyish-blue font-semibold cursor-pointer hover:text-moderate-blue transition-all duration-100 text-xl">
               -
             </div>
           </section>
@@ -159,7 +159,7 @@ export default function Message({
               }
             >
               <img src="./images/icon-reply.svg" alt="reply-icon"></img>
-              <h4 className="text-moderate-blue font-bold hover:text-light-greyish-blue transition-all duration-100">
+              <h4 className="text-moderate-blue font-bold hover:text-light-greyish-blue transition-all duration-100 phone:text-sm">
                 Reply
               </h4>
             </div>
@@ -168,7 +168,7 @@ export default function Message({
           <section
             className={
               comment.user.username === "juliusomo"
-                ? "flex gap-4 custom-680:hidden"
+                ? "hidden gap-4 custom-680:flex"
                 : "hidden"
             }
           >
@@ -177,21 +177,20 @@ export default function Message({
               className="flex items-center gap-2 cursor-pointer"
             >
               <img src="./images/icon-delete.svg" alt="delete-icon"></img>
-              <p className="font-bold text-soft-red hover:text-pale-red transition-all duration-100">
+              <p className="font-bold text-soft-red hover:text-pale-red transition-all duration-100 phone:text-sm">
                 Delete
               </p>
             </div>
             <div
               onClick={() => handleEdit(comment.id)}
-              className="flex items-center gap-2 cursor-pointer custom-680:hidden"
+              className="flex items-center gap-2 cursor-pointer"
             >
               <img src="./images/icon-edit.svg" alt="edit-icon"></img>
-              <p className="font-bold text-moderate-blue hover:text-light-greyish-blue transition-all duration-100">
+              <p className="font-bold text-moderate-blue hover:text-light-greyish-blue transition-all duration-100 phone:text-sm">
                 Edit
               </p>
             </div>
           </section>
-          
         </div>
       </div>
       <div>
