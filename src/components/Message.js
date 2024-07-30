@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import InputFromUser from "./InputFromUser";
 import EditComment from "./EditComment";
 
@@ -17,10 +17,8 @@ export default function Message({
   const [isEditing, setIsEditing] = useState(false);
 
   function handleEdit(id) {
-    console.log(id);
     if (id === comment.id) {
-      setIsEditing(true);
-      console.log('Edit has been clicked');
+      setIsEditing((prev) => !prev);
     }
   }
 
@@ -40,11 +38,11 @@ export default function Message({
           onClick={handleVoteCount}
           className="bg-light-grey basis-[6.5%] py-1 flex flex-col gap-1 items-center rounded-lg h-[5.4rem]"
         >
-          <div className="text-greyish-blue font-semibold cursor-pointer">
+          <div className="text-greyish-blue font-semibold cursor-pointer hover:text-moderate-blue transition-all duration-100">
             +
           </div>
           <h2 className="text-moderate-blue font-bold">{voteCount}</h2>
-          <div className="text-greyish-blue font-semibold cursor-pointer">
+          <div className="text-greyish-blue font-semibold cursor-pointer hover:text-moderate-blue transition-all duration-100">
             -
           </div>
         </section>
@@ -81,7 +79,9 @@ export default function Message({
               }
             >
               <img src="./images/icon-reply.svg" alt="reply-icon"></img>
-              <h4 className="text-moderate-blue font-bold">Reply</h4>
+              <h4 className="text-moderate-blue font-bold hover:text-light-greyish-blue transition-all duration-100">
+                Reply
+              </h4>
             </div>
 
             <article
@@ -94,18 +94,29 @@ export default function Message({
                 className="flex items-center gap-2 cursor-pointer"
               >
                 <img src="./images/icon-delete.svg" alt="delete-icon"></img>
-                <p className="font-bold text-soft-red">Delete</p>
+                <p className="font-bold text-soft-red hover:text-pale-red transition-all duration-100">
+                  Delete
+                </p>
               </div>
-              <div onClick={() => handleEdit(comment.id)} className="flex items-center gap-2 cursor-pointer">
+              <div
+                onClick={() => handleEdit(comment.id)}
+                className="flex items-center gap-2 cursor-pointer"
+              >
                 <img src="./images/icon-edit.svg" alt="edit-icon"></img>
-                <p className="font-bold text-moderate-blue">Edit</p>
+                <p className="font-bold text-moderate-blue hover:text-light-greyish-blue transition-all duration-100">
+                  Edit
+                </p>
               </div>
             </article>
           </article>
 
           <article className="border-moderate-blue mt-3">
             {isEditing ? (
-              <EditComment comment={comment} onUserInput={onUserInput} setIsEditing={setIsEditing} />
+              <EditComment
+                comment={comment}
+                onUserInput={onUserInput}
+                setIsEditing={setIsEditing}
+              />
             ) : (
               <p className="text-greyish-blue text-sm">
                 {comment.replyingTo && (

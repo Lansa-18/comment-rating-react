@@ -1,11 +1,14 @@
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-export default function EditComment({ comment, onUserInput, setIsEditing }) {
-  const initialContent = comment.replyingTo
-    ? `@${comment.replyingTo} ${comment.content}`
-    : comment.content;
+export default function EditComment({ comment, setIsEditing }) {
+  const [content, setContent] = useState(comment.content);
+  const textareaRef = useRef(null);
 
-  const [content, setContent] = useState(initialContent);
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  }, []);
 
   function handleChangeContent(e) {
     setContent(e.target.value);
@@ -23,15 +26,15 @@ export default function EditComment({ comment, onUserInput, setIsEditing }) {
       <form>
         <textarea
           rows={4}
-          cols={10}
-          className="placeholder:text-greyish-blue w-full border border-dark-blue outline-none rounded-md resize-none p-3"
+          ref={textareaRef}
+          className="placeholder:text-greyish-blue w-full border border-moderate-blue outline-none rounded-md resize-none p-3 caret-moderate-blue"
           value={content}
           onChange={handleChangeContent}
         ></textarea>
       </form>
       <button
         onClick={() => handleUserEdit(comment.id)}
-        className="bg-moderate-blue text-white font-bold rounded-lg px-5 py-3 ml-auto"
+        className="bg-moderate-blue text-white font-bold rounded-lg px-5 py-3 ml-auto transition-all duration-200 hover:bg-light-greyish-blue"
       >
         Update
       </button>

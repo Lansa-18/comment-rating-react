@@ -10,7 +10,7 @@ export default function UserComment({
   onSetValue,
   curUserImg,
   onUserInput,
-  curOpen
+  curOpen,
 }) {
   return (
     <div className="border-soft-red">
