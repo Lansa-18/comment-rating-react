@@ -1,5 +1,6 @@
 import { useState } from "react";
 import InputFromUser from "./InputFromUser";
+import EditComment from "./EditComment";
 
 export default function Message({
   comment,
@@ -11,10 +12,17 @@ export default function Message({
   onSetValue,
   curUserImg,
   onUserInput,
-
 }) {
   const [voteCount, setVoteCount] = useState(comment.score);
-  // console.log(inpValue, onSetValue, curUserImg, onUserInput, comment, onToggleDeleteModal, onReplies, isReplied, commentToReply);
+  const [isEditing, setIsEditing] = useState(false);
+
+  function handleEdit(id) {
+    console.log(id);
+    if (id === comment.id) {
+      setIsEditing(true);
+      console.log('Edit has been clicked');
+    }
+  }
 
   function handleVoteCount(e) {
     if (e.target.textContent === "+") {
@@ -41,7 +49,7 @@ export default function Message({
           </div>
         </section>
 
-        <section className="basis-[92%]  border-soft-red">
+        <section className="basis-[92%] border-soft-red">
           <article className="flex items-center justify-between">
             <div className="flex items-center border-soft-red gap-5">
               <img
@@ -88,7 +96,7 @@ export default function Message({
                 <img src="./images/icon-delete.svg" alt="delete-icon"></img>
                 <p className="font-bold text-soft-red">Delete</p>
               </div>
-              <div className="flex items-center gap-2 cursor-pointer">
+              <div onClick={() => handleEdit(comment.id)} className="flex items-center gap-2 cursor-pointer">
                 <img src="./images/icon-edit.svg" alt="edit-icon"></img>
                 <p className="font-bold text-moderate-blue">Edit</p>
               </div>
@@ -96,14 +104,18 @@ export default function Message({
           </article>
 
           <article className="border-moderate-blue mt-3">
-            <p className="text-greyish-blue text-sm">
-              {comment.replyingTo && (
-                <span className="font-bold text-moderate-blue">
-                  {`@${comment?.replyingTo} `}
-                </span>
-              )}
-              {comment?.content}
-            </p>
+            {isEditing ? (
+              <EditComment comment={comment} onUserInput={onUserInput} setIsEditing={setIsEditing} />
+            ) : (
+              <p className="text-greyish-blue text-sm">
+                {comment.replyingTo && (
+                  <span className="font-bold text-moderate-blue">
+                    {`@${comment?.replyingTo} `}
+                  </span>
+                )}
+                {comment?.content}
+              </p>
+            )}
           </article>
         </section>
       </div>

@@ -12,7 +12,7 @@ export default function InputFromUser({
   }
 
   return (
-    <div className="flex  border-soft-red justify-between bg-white p-4 rounded-lg mb-2 mt-[-.5rem]">
+    <div className="flex border-soft-red justify-between bg-white p-4 rounded-lg mb-2 mt-[-.5rem]">
       <img
         className="w-[5%] h-[5%]"
         src={curUserImg}
