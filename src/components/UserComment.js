@@ -27,7 +27,7 @@ export default function UserComment({
         onUserInput={onUserInput}
         curOpen={curOpen}
       />
-      <div className="border-l border-greyish-blue-opaque pl-8 ml-7">
+      <div className="border-l border-greyish-blue-opaque pl-8 ml-7 phone:pl-3 phone:ml-2">
         {comment.replies.length > 0 &&
           comment.replies.map((reply) => (
             <Message

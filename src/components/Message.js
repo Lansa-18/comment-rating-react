@@ -33,10 +33,10 @@ export default function Message({
 
   return (
     <>
-      <div className="bg-white p-6 flex gap-5 rounded-lg mb-5 border-soft-red">
+      <div className="bg-white p-6 flex gap-5 rounded-lg mb-5 border-soft-red custom-680:flex-col">
         <section
           onClick={handleVoteCount}
-          className="bg-light-grey basis-[6.5%] py-1 flex flex-col gap-1 items-center rounded-lg h-[5.4rem]"
+          className="bg-light-grey basis-[6.5%] py-1 flex flex-col gap-1 items-center rounded-lg h-[5.4rem] custom-680:hidden"
         >
           <div className="text-greyish-blue font-semibold cursor-pointer hover:text-moderate-blue transition-all duration-100">
             +
@@ -47,19 +47,19 @@ export default function Message({
           </div>
         </section>
 
-        <section className="basis-[92%] border-soft-red">
+        <section className="basis-[92%] border-soft-red custom-680:border custom-680:basis-full">
           <article className="flex items-center justify-between">
-            <div className="flex items-center border-soft-red gap-5">
+            <div className="flex items-center border-moderate-blue gap-5 custom-680:border custom-680:w-[85%] phone:gap-4 phone:w-full">
               <img
-                className="w-[12%]"
+                className="w-[12%] custom-680:w-[10%] phone:w-[8%]"
                 src={comment.user.image.png}
                 alt="amyrobson-image"
               ></img>
-              <h6 className="text-dark-blue font-bold text-[1rem]">
+              <h6 className="text-dark-blue font-bold text-[1rem] phone:text-sm">
                 {comment.user.username}
               </h6>
               {comment.user.username === "juliusomo" && (
-                <div className="bg-moderate-blue rounded-md text-sm text-white font-bold py-[0.3rem] px-[0.5rem] text-center">
+                <div className="bg-moderate-blue rounded-md text-sm text-white font-bold py-[0.3rem] px-[0.5rem] text-center phone:text-[.7rem]">
                   you
                 </div>
               )}
@@ -74,7 +74,7 @@ export default function Message({
               }}
               className={
                 comment.user.username !== "juliusomo"
-                  ? "flex items-center gap-2 border-soft-red cursor-pointer"
+                  ? "flex items-center gap-2 border-soft-red cursor-pointer custom-680:hidden"
                   : "hidden"
               }
             >
@@ -86,7 +86,9 @@ export default function Message({
 
             <article
               className={
-                comment.user.username === "juliusomo" ? "flex gap-4" : "hidden"
+                comment.user.username === "juliusomo"
+                  ? "flex gap-4 custom-680:hidden"
+                  : "hidden"
               }
             >
               <div
@@ -100,7 +102,7 @@ export default function Message({
               </div>
               <div
                 onClick={() => handleEdit(comment.id)}
-                className="flex items-center gap-2 cursor-pointer"
+                className="flex items-center gap-2 cursor-pointer custom-680:hidden"
               >
                 <img src="./images/icon-edit.svg" alt="edit-icon"></img>
                 <p className="font-bold text-moderate-blue hover:text-light-greyish-blue transition-all duration-100">
@@ -129,6 +131,68 @@ export default function Message({
             )}
           </article>
         </section>
+
+        {/* UI AT 686X */}
+        <div className="hidden custom-680:flex border border-black justify-between items-center">
+          <section
+            onClick={handleVoteCount}
+            className="bg-light-grey py-1 hidden gap-1 rounded-lg custom-680:flex"
+          >
+            <div className="text-greyish-blue font-semibold cursor-pointer hover:text-moderate-blue transition-all duration-100">
+              +
+            </div>
+            <h2 className="text-moderate-blue font-bold">{voteCount}</h2>
+            <div className="text-greyish-blue font-semibold cursor-pointer hover:text-moderate-blue transition-all duration-100">
+              -
+            </div>
+          </section>
+
+          <section>
+            <div
+              onClick={() => {
+                onReplies(comment.id);
+              }}
+              className={
+                comment.user.username !== "juliusomo"
+                  ? "hidden items-center gap-2 border-soft-red cursor-pointer custom-680:flex"
+                  : "hidden"
+              }
+            >
+              <img src="./images/icon-reply.svg" alt="reply-icon"></img>
+              <h4 className="text-moderate-blue font-bold hover:text-light-greyish-blue transition-all duration-100">
+                Reply
+              </h4>
+            </div>
+          </section>
+
+          <section
+            className={
+              comment.user.username === "juliusomo"
+                ? "flex gap-4 custom-680:hidden"
+                : "hidden"
+            }
+          >
+            <div
+              onClick={() => onToggleDeleteModal(comment.id)}
+              className="flex items-center gap-2 cursor-pointer"
+            >
+              <img src="./images/icon-delete.svg" alt="delete-icon"></img>
+              <p className="font-bold text-soft-red hover:text-pale-red transition-all duration-100">
+                Delete
+              </p>
+            </div>
+            <div
+              onClick={() => handleEdit(comment.id)}
+              className="flex items-center gap-2 cursor-pointer custom-680:hidden"
+            >
+              <img src="./images/icon-edit.svg" alt="edit-icon"></img>
+              <p className="font-bold text-moderate-blue hover:text-light-greyish-blue transition-all duration-100">
+                Edit
+              </p>
+            </div>
+          </section>
+          
+        </div>
       </div>
       <div>
         {isReplied && commentToReply === comment.id ? (

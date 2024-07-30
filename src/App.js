@@ -15,6 +15,7 @@ export default function App() {
 
   const mainDivRef = useRef(null);
 
+
   function handleClickOutside(e) {
     if (mainDivRef.current && !mainDivRef.current.contains(e.target)) {
       setActiveReplyId(null);
@@ -127,7 +128,10 @@ export default function App() {
           onDeleteModal={handleDeleteModal}
         />
       )}
-      <main ref={mainDivRef} className="absolute left-[50%] -translate-x-1/2 w-[45%] my-10">
+      <main
+        ref={mainDivRef}
+        className="absolute left-[50%] -translate-x-1/2 w-[45%] my-10 laptop:w-[60%] tab-port:w-[80%] land-phone:w-[90%] custom-680:w-[80%] phone:w-[95%]"
+      >
         {comments.map((comment) => (
           <UserComment
             commentToReply={activeReplyId}
