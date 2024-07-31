@@ -83,6 +83,7 @@ export default function App() {
         })
       );
       handleSetValue(id, "");
+      setActiveReplyId(prev => prev === id ? null : id);
     } else {
       setComments((prev) => [
         ...prev,
