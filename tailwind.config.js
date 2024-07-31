@@ -14,6 +14,7 @@ module.exports = {
         "land-phone": { max: "47.999em" }, // 768px
         "custom-680": { max: "42.499em" }, // 680px
         phone: { max: "35.999em" }, // 576px
+        "custom-390": { max: "24.374em" }, // 390px
       },
       colors: {
         "moderate-blue": "hsl(238, 40%, 52%)",

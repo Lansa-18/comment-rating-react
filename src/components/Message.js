@@ -23,11 +23,16 @@ export default function Message({
   }
 
   function handleVoteCount(e) {
-    if (e.target.textContent === "+") {
-      setVoteCount((prev) => prev + 1);
+    if (voteCount > 0 && e.target.textContent === "-") {
+      if (e.target.textContent === "-") {
+        setVoteCount((prev) => prev - 1);
+      }
     }
-    if (e.target.textContent === "-") {
-      setVoteCount((prev) => prev - 1);
+
+    if (voteCount >= 0 && e.target.textContent === "+") {
+      if (e.target.textContent === "+") {
+        setVoteCount((prev) => prev + 1);
+      }
     }
   }
 
@@ -47,9 +52,9 @@ export default function Message({
           </div>
         </section>
 
-        <section className="basis-[92%] border-soft-red custom-680:border custom-680:basis-full">
+        <section className="basis-[92%] custom-680:basis-full">
           <article className="flex items-center justify-between">
-            <div className="flex items-center border-moderate-blue gap-5 custom-680:border custom-680:w-[85%] phone:gap-4 phone:w-full">
+            <div className="flex items-center gap-5 custom-680:w-[85%] phone:gap-4 phone:w-full">
               <img
                 className="w-[12%] custom-680:w-[10%] phone:w-[8%]"
                 src={comment.user.image.png}
@@ -112,7 +117,7 @@ export default function Message({
             </article>
           </article>
 
-          <article className="border-moderate-blue mt-3">
+          <article className="mt-3">
             {isEditing ? (
               <EditComment
                 comment={comment}
@@ -133,10 +138,10 @@ export default function Message({
         </section>
 
         {/* UI AT 686X */}
-        <div className="hidden custom-680:flex border border-black justify-between items-center">
+        <div className="hidden custom-680:flex justify-between items-center">
           <section
             onClick={handleVoteCount}
-            className="bg-light-grey w-[19%] justify-between items-center py-1 px-3 hidden gap-1 rounded-lg custom-680:flex phone:w-[25%]"
+            className="bg-light-grey w-[19%] justify-between items-center py-1 px-3 hidden gap-1 rounded-lg custom-680:flex phone:w-[25%] custom-390:w-[33%]"
           >
             <div className="text-greyish-blue font-semibold cursor-pointer hover:text-moderate-blue transition-all duration-100 text-xl">
               +
